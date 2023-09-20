@@ -23,8 +23,8 @@
             <quota>default</quota>
             <access_management>1</access_management>
         </default>
-        <${CLICKHOUSE_AIRFLOW}>
-            <password>${CLICKHOUSE_ADMIN_PASS}</password>
+        <${CLICKHOUSE_AIRFLOW_USER}>
+            <password>${CLICKHOUSE_AIRFLOW_PASS}</password>
             <networks>
                 <ip>::/0</ip>
             </networks>

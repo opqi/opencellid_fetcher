@@ -2,11 +2,13 @@
 
 ## Create .env file and run Airflow
 cd airflow/
+
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 docker-compose up -d
 
 ## Create .env file for ClickHouse
 cd clickhouse/
+
 touch .env
 
 ### .env file should contain

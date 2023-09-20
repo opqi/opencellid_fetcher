@@ -1,8 +1,11 @@
 from airflow import DAG
-from airflow.operators.http_sensor import HttpSensor
+from airflow.providers.http.sensors.http import HttpSensor
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.bash import BashOperator
 from airflow.models import Variable
 from datetime import datetime
+import os
+import sys
 
 path = os.path.expanduser('/opt/airflow/')
 # Добавим путь к коду проекта в переменную окружения, чтобы он был доступен python-процессу
@@ -12,25 +15,27 @@ sys.path.insert(0, path)
 
 from pipelines.opencellid.getdata import fetch_opencellid_data 
 
-default_args = dict(
+default_args = {
     'owner': 'pdmitriev',
     'start_date': datetime(2023, 9, 20),
     'retries': 1,
-)
+}
 
 dag = DAG(
     dag_id = 'mcc_filtered_dag',
     default_args=default_args,
-    description='Load OpenCellId data into ClickHouse using PySpark'
-    scedule_interval = '0 1 * * *',
+    description='Load OpenCellId data into ClickHouse using PySpark',
+    schedule_interval = '0 1 * * *',
     catchup = False,
 )
 
 fetch_data_task = PythonOperator(
-    task_id='fetch_open_cell_id_data',
+    task_id='fetch_opencellid_data',
     python_callable=fetch_opencellid_data,
     dag=dag,
 )
+
+# TODO add bash orprator that will remove the file that was produced by PythonOperator
 
 # Add a sensor to check if the OpenCellId API is available
 api_sensor = HttpSensor(

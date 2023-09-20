@@ -1,3 +1,5 @@
 # env
 clickhouse/.env
 airflow/.env
+
+__pycache__

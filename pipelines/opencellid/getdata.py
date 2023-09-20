@@ -11,7 +11,7 @@ mcc_param = ",".join(str(code) for code in mcc_codes)
 
 api_key = Variable.get("OPENCELLID_API_KEY")
 clickhouse_username = Variable.get("CLICKHOUSE_AIRFLOW_USER")
-clickhouse_password = Variable.get("CLICKHOUSE_AIRFLOW_PASSWORD")
+clickhouse_password = Variable.get("CLICKHOUSE_AIRFLOW_PASS")
 clickhouse_server_url = Variable.get("CLICKHOUSE_SERVER_URL")
     
 
