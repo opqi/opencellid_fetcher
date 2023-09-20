@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  clickhouse:
+    image: yandex/clickhouse-server:latest
+    container_name: clickhouse
+    ports:
+      - "${CLICKHOUSE_HTTP_PORT}:${CLICKHOUSE_HTTP_PORT}"
+      - "${CLICKHOUSE_NATIVE_PORT}:${CLICKHOUSE_NATIVE_PORT}"
+      - "${CLICKHOUSE_NATIVE_TCP_PORT}:${CLICKHOUSE_NATIVE_TCP_PORT}"
+    volumes:
+      - ./clickhouse_config.xml:/etc/clickhouse-server/config.d/config.xml 
+    env_file:
+      - .env
+    networks:
+      - clickhouse-net
+
+networks:
+  clickhouse-net:
+    driver: bridge
