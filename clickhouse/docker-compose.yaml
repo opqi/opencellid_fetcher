@@ -6,15 +6,11 @@ services:
     container_name: clickhouse
     ports:
       - "${CLICKHOUSE_HTTP_PORT}:${CLICKHOUSE_HTTP_PORT}"
-      - "${CLICKHOUSE_NATIVE_PORT}:${CLICKHOUSE_NATIVE_PORT}"
+      - "${CLICKHOUSE_TCP_PORT}:${CLICKHOUSE_TCP_PORT}"
       - "${CLICKHOUSE_NATIVE_TCP_PORT}:${CLICKHOUSE_NATIVE_TCP_PORT}"
     volumes:
-      - ./clickhouse_config.xml:/etc/clickhouse-server/config.d/clickhouse_config.xml 
+      - ./config:/etc/clickhouse-server
+      - ./initdb:/docker-entrypoint-initdb.d
     env_file:
       - .env
-    networks:
-      - clickhouse-net
-
-networks:
-  clickhouse-net:
-    driver: bridge
+    command: ["clickhouse-server", "--config-file=/etc/clickhouse-server/config.xml"]

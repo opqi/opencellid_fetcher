@@ -10,12 +10,13 @@
     <errorlog>${CLICKHOUSE_ERROR_LOG_PATH}</errorlog>
     <part_log>${CLICKHOUSE_PART_LOG_PATH}</part_log>
     <http_port>${CLICKHOUSE_HTTP_PORT}</http_port>
-    <tcp_port>${CLICKHOUSE_NATIVE_TCP_PORT}</tcp_port>
+    <tcp_port>${CLICKHOUSE_TCP_PORT}</tcp_port>
+    <interserver_http_port>${CLICKHOUSE_NATIVE_TCP_PORT}</interserver_http_port>
 
     <!-- Users Configuration -->
     <users>
         <default>
-            <password>${CLICKHOUSE_PASSWORD}</password>
+            <password>${CLICKHOUSE_DEFAULT_PASS}</password>
             <networks>
                 <ip>::/0</ip>
             </networks>
@@ -23,7 +24,7 @@
             <quota>default</quota>
             <access_management>1</access_management>
         </default>
-        <${CLICKHOUSE_AIRFLOW_USER}>
+        <airflow>
             <password>${CLICKHOUSE_AIRFLOW_PASS}</password>
             <networks>
                 <ip>::/0</ip>
@@ -31,6 +32,9 @@
             <profile>default</profile>
             <quota>default</quota>
             <access_management>1</access_management>
-        </${CLICKHOUSE_AIRFLOW}>
+        </airflow>
     </users>
+
+    <log>CLICKHOUSE_LOG_PATH</log>
+    <errorlog>CLICKHOUSE_ERROR_LOG_PATH</errorlog>
 </yandex>
