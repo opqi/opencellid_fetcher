@@ -16,8 +16,10 @@ def fetch_opencellid_data():
 
     # Create the data folder if it doesn't exist
     os.makedirs(data_folder, exist_ok=True)
+    logger.info(f"Created temporary data folder {data_folder}")
 
     try:
+        logger.info(f"Downloading data")
         # Send an HTTP GET request to the URL
         response = requests.get(download_url, stream=True)
 

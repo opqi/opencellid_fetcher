@@ -2,13 +2,11 @@
 
 ## Create .env file and run Airflow
 cd airflow/
-
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 docker-compose up -d
 
 ## Create .env file for ClickHouse
 cd clickhouse/
-
 touch .env
 
 ### .env file should contain
@@ -24,7 +22,7 @@ CLICKHOUSE_FORMAT_SCHEMA_PATH=/var/lib/clickhouse/format_schemas
 CLICKHOUSE_LOG_PATH=/var/log/clickhouse-server/clickhouse-server.log
 CLICKHOUSE_ERROR_LOG_PATH=/var/log/clickhouse-server/clickhouse-server.err.log
 CLICKHOUSE_PART_LOG_PATH=/var/lib/clickhouse/ctries
-CLICKHOUSE_AIRFLOW=your_username
+CLICKHOUSE_AIRFLOW_USER=your_username
 CLICKHOUSE_AIRFLOW_PASS=your_pass
 
 ## Run ClickHouse
@@ -32,5 +30,6 @@ docker-compose up -d
 
 ## Set Variables in Airflow UI
 airflow variables -s OPENCELLID_API_KEY your_api_key
-airflow variables -s CLICKHOUSE_AIRFLOW your_username
-airflow variables -s CLICKHOUSE_AIRFLOW_PASSWORD your_password
+airflow variables -s CLICKHOUSE_AIRFLOW_USER your_username
+airflow variables -s CLICKHOUSE_AIRFLOW_PASS your_password
+airflow variables -s CLICKHOUSE_SERVER_URL your_server
