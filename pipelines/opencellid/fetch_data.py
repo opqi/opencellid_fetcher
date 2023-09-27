@@ -38,6 +38,8 @@ def fetch_opencellid_data():
     except Exception as e:
         logger.error(f"Error occurred while downloading data: {str(e)}")
 
+    return file_path
+
 # Example usage
 if __name__ == "__main__":
     from loguru import logger
